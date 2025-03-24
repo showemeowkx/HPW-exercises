@@ -3,9 +3,9 @@
 const randStr = require("./helpers/random-string");
 
 const randStrGen = function* (length, alphabet) {
-  let str = randStr(length, alphabet);
-
-  while (true) yield str;
+  while (true) {
+    yield randStr(length, alphabet);
+  }
 };
 
 module.exports = randStrGen;

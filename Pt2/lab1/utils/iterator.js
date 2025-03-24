@@ -7,11 +7,12 @@ const randStrIterable = (length, alphabet, duration) => {
   checkArgs(length, alphabet, duration);
   return {
     [Symbol.iterator]() {
+      const generator = randStrGen(length, alphabet);
       const iterator = {
         time: Date.now(),
         next() {
           return {
-            value: randStrGen(length, alphabet).next().value,
+            value: generator.next().value,
             done: Date.now() - this.time >= duration,
           };
         },
