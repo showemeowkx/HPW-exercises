@@ -1,0 +1,10 @@
+{
+  "name": "lab2",
+  "version": "1.0.0",
+  "description": "Implementation of function memoization",
+  "license": "UNLICENSED",
+  "author": "Oleksandr Cherepov",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {"start": "node index"}
+}
