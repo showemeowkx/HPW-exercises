@@ -1,0 +1,12 @@
+{
+  "name": "lab4",
+  "version": "1.0.0",
+  "description": "Implementation of a bidirectional queue",
+  "license": "UNLICENSED",
+  "author": "Oleksandr Cherepov",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  }
+}
