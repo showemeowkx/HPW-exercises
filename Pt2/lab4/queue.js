@@ -3,6 +3,8 @@ const { getElementByPriority } = require("./utils");
 class Queue {
   constructor() {
     this.buffer = [];
+    this.highest = null;
+    this.lowest = null;
   }
 
   getBuffer() {
@@ -23,6 +25,16 @@ Lowest: ${JSON.stringify(this.peek("lowest"))}\n`;
       value: item,
       priority: priority,
     };
+
+    if (this.highest === null && this.lowest === null) {
+      this.highest = element;
+      this.lowest = element;
+    } else {
+      if (this.highest.priority < priority) this.highest = element;
+
+      if (this.lowest.priority > priority) this.lowest = element;
+    }
+
     this.buffer.push(element);
   }
 
@@ -34,10 +46,8 @@ Lowest: ${JSON.stringify(this.peek("lowest"))}\n`;
     if (mode === "newest") this.buffer.pop();
 
     if (mode === "highest" || mode === "lowest") {
-      const priorityElement = getElementByPriority(this.buffer, mode);
-      this.buffer = this.buffer.filter(
-        (element) => element !== priorityElement
-      );
+      const element = mode === "highest" ? this.highest : this.lowest;
+      this.buffer = this.buffer.filter((el) => el !== element);
     }
   }
 
