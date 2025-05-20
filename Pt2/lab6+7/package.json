@@ -1,12 +1,13 @@
 {
   "name": "lab6",
   "version": "1.0.0",
-  "description": "Usage of streams",
+  "description": "Usage of streams and event emitter",
   "license": "UNLICENSED",
   "author": "Oleksandr Cherepov",
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start:streams": "node ./pure-streams/index.js",
+    "start:emitter": "node ./event-emitter/index.js"
   }
 }

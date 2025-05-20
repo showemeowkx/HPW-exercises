@@ -3,15 +3,16 @@ const https = require("https");
 const { Transform } = require("stream");
 const path = require("path");
 
-const fetchJson = (url) => {
+const fetchAndWriteJson = (url, directory) => {
   return new Promise((resolve, reject) => {
     const fileName = `${Date.now()}.json`;
-    const filePath = path.join(__dirname, "files", "originals", fileName);
+    const filePath = path.join(__dirname, directory, fileName);
     https
       .get(url, (res) => {
         if (res.statusCode !== 200) {
           res.resume();
-          reject(new Error("Failed to fetch JSON"));
+          const error = new Error("Failed to fetch JSON");
+          reject(error);
           return;
         }
         res.on("data", (chunk) => {
@@ -51,4 +52,4 @@ const writeJson = (fileName, primaryPath, secondaryPath) => {
   });
 };
 
-module.exports = { fetchJson, writeJson };
+module.exports = { fetchAndWriteJson, writeJson };
