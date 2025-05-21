@@ -9,9 +9,7 @@ const fetchAndWriteJson = async (url, primaryPath, secondaryPath) => {
   https
     .get(url, (res) => {
       if (res.statusCode !== 200) {
-        res.resume();
-        const error = new Error("Failed to fetch JSON");
-        fileEmitter.emit("error-handle", error);
+        fileEmitter.emit("error-handle", new Error("Failed to fetch JSON"));
         return;
       }
       res.on("data", (chunk) => {

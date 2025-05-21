@@ -11,8 +11,7 @@ const fetchAndWriteJson = (url, directory) => {
       .get(url, (res) => {
         if (res.statusCode !== 200) {
           res.resume();
-          const error = new Error("Failed to fetch JSON");
-          reject(error);
+          reject(new Error("Failed to fetch JSON"));
           return;
         }
         res.on("data", (chunk) => {
@@ -23,7 +22,7 @@ const fetchAndWriteJson = (url, directory) => {
         });
       })
       .on("error", (err) => {
-        reject(new Error(`Failed to make HTTP request`));
+        reject(new Error(`Failed to make HTTP request: ${err}`));
       });
   });
 };
@@ -47,6 +46,9 @@ const writeJson = (fileName, primaryPath, secondaryPath) => {
   const writeStream = fs.createWriteStream(filePathWrite);
 
   readStream.pipe(upperJsonStream).pipe(writeStream);
+  writeStream.on("error", (err) => {
+    console.log(err);
+  });
   writeStream.on("finish", () => {
     console.log("File written successfully");
   });

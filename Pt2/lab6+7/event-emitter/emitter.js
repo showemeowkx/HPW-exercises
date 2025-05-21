@@ -33,6 +33,9 @@ const writeJson = (fileName, primaryPath, secondaryPath) => {
   const writeStream = fs.createWriteStream(filePathWrite);
 
   readStream.pipe(upperJsonStream).pipe(writeStream);
+  writeStream.on("error", (err) => {
+    fileEmitter.emit("error-handle", err);
+  });
   writeStream.on("finish", () => {
     console.log("File written successfully");
   });
