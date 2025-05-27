@@ -2,9 +2,9 @@ import { Calculator } from "./calculator";
 
 const calculator = new Calculator();
 
-calculator.add(2, 3);
+const number = calculator.add(2, 3);
 
-calculator.multiply(2, 3);
+calculator.multiply(2, number);
 
 calculator.divide(2, 0);
 
